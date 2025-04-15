@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodTunes - Music for Your Mood</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+       
+#progress-bar {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 6px;
+    background: #4B5563;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #8B5CF6;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#progress-bar:active::-webkit-slider-thumb {
+    transform: scale(1.2);
+}
+        
+        /* Animation for mood buttons */
+        .mood-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .mood-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Navigation -->
+    <!-- In index.html (navigation section) -->
+<nav class="bg-gray-800 p-4 flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+        <img src="music-player.png" alt="Music Logo" class="w-12 h-12 font-bold">
+        <h1 class="text-xl font-bold">MoodTunes</h1>
+    </div>
+    <div class="space-x-4" id="auth-buttons">
+        <!-- This will be populated by JavaScript -->
+    </div>
+</nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 pb-20">
+        <section class="text-center py-12">
+            <h2 class="text-4xl font-bold mb-4">Music That Matches Your Mood</h2>
+            <p class="text-xl text-gray-300 mb-8">Select your current mood and let us play the perfect playlist for you</p>
+            
+            <div class="py-12 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                        <!-- Happy Mood -->
+                        <div class="relative group overflow-hidden rounded-xl shadow-2xl transition-all duration-300 hover:shadow-yellow-400/20">
+                            <img src="https://static.vecteezy.com/system/resources/thumbnails/033/139/087/small_2x/little-joyful-child-smiling-cartoon-girl-sorceress-playing-with-a-magic-wand-free-photo.jpg" 
+                                 alt="Happy Mood" 
+                                 class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-6">
+                                <h3 class="text-2xl font-bold text-white mb-2">Happy</h3>
+                                <button data-mood="happy" class="mood-btn w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-6 py-3 rounded-lg font-semibold flex items-center justify-center transition-all transform translate-y-2 group-hover:translate-y-0 opacity-90 hover:opacity-100">
+                                    <i class="fas fa-smile mr-2"></i> Play Happy
+                                </button>
+                            </div>
+                        </div>
+            
+                        <!-- Sad Mood -->
+                        <div class="relative group overflow-hidden rounded-xl shadow-2xl transition-all duration-300 hover:shadow-blue-400/20">
+                            <img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                 alt="Sad Mood" 
+                                 class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-6">
+                                <h3 class="text-2xl font-bold text-white mb-2">Sad</h3>
+                                <button data-mood="sad" class="mood-btn w-full bg-blue-400 hover:bg-blue-500 text-gray-900 px-6 py-3 rounded-lg font-semibold flex items-center justify-center transition-all transform translate-y-2 group-hover:translate-y-0 opacity-90 hover:opacity-100">
+                                    <i class="fas fa-sad-tear mr-2"></i> Play Sad
+                                </button>
+                            </div>
+                        </div>
+            
+                        <!-- Energetic Mood -->
+                        <div class="relative group overflow-hidden rounded-xl shadow-2xl transition-all duration-300 hover:shadow-red-400/20">
+                            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                 alt="Energetic Mood" 
+                                 class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-6">
+                                <h3 class="text-2xl font-bold text-white mb-2">Energetic</h3>
+                                <button data-mood="energetic" class="mood-btn w-full bg-red-400 hover:bg-red-500 text-gray-900 px-6 py-3 rounded-lg font-semibold flex items-center justify-center transition-all transform translate-y-2 group-hover:translate-y-0 opacity-90 hover:opacity-100">
+                                    <i class="fas fa-bolt mr-2"></i> Play Energetic
+                                </button>
+                            </div>
+                        </div>
+            
+                        <!-- Calm Mood -->
+                        <div class="relative group overflow-hidden rounded-xl shadow-2xl transition-all duration-300 hover:shadow-green-400/20">
+                            <img src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                 alt="Calm Mood" 
+                                 class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-6">
+                                <h3 class="text-2xl font-bold text-white mb-2">Calm</h3>
+                                <button data-mood="calm" class="mood-btn w-full bg-green-400 hover:bg-green-500 text-gray-900 px-6 py-3 rounded-lg font-semibold flex items-center justify-center transition-all transform translate-y-2 group-hover:translate-y-0 opacity-90 hover:opacity-100">
+                                    <i class="fas fa-spa mr-2"></i> Play Calm
+                                </button>
+                            </div>
+                        </div>
+            
+                        <!-- Romantic Mood -->
+                        <div class="relative group overflow-hidden rounded-xl shadow-2xl transition-all duration-300 hover:shadow-pink-400/20">
+                            <img src="https://img.freepik.com/free-vector/blurred-valentine-s-day-background_23-2148391680.jpg?t=st=1744554822~exp=1744558422~hmac=655ea837a507bf347483758c53f1603f0a41b914910d382400a7358f8f7803f0&w=1380" 
+                                 alt="Romantic Mood" 
+                                 class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-6">
+                                <h3 class="text-2xl font-bold text-white mb-2">Romantic</h3>
+                                <button data-mood="romantic" class="mood-btn w-full bg-pink-400 hover:bg-pink-500 text-gray-900 px-6 py-3 rounded-lg font-semibold flex items-center justify-center transition-all transform translate-y-2 group-hover:translate-y-0 opacity-90 hover:opacity-100">
+                                    <i class="fas fa-heart mr-2"></i> Play Romantic
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- Player Section -->
+        <section id="player-section" class="hidden bg-gray-800 rounded-lg p-6 max-w-2xl mx-auto shadow-xl">
+            <div class="flex items-center mb-4">
+                <img id="song-thumbnail" src="" alt="Song thumbnail" class="w-16 h-16 rounded-lg mr-4 object-cover">
+                <div class="flex-1">
+                    <h3 id="song-title" class="font-bold text-lg truncate">No song selected</h3>
+                    <p id="song-artist" class="text-gray-400 truncate">Select a mood to begin</p>
+                </div>
+            </div>
+            
+            <!-- Player Controls -->
+            <div class="flex items-center justify-between mb-4 px-4">
+                <button id="prev-btn" class="p-2 rounded-full hover:bg-gray-700 transition-colors">
+                    <i class="fas fa-step-backward text-xl"></i>
+                </button>
+                <button id="play-btn" class="p-4 bg-purple-600 hover:bg-purple-700 rounded-full transition-colors">
+                    <i class="fas fa-play text-xl"></i>
+                </button>
+                <button id="next-btn" class="p-2 rounded-full hover:bg-gray-700 transition-colors">
+                    <i class="fas fa-step-forward text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Progress Bar -->
+            <!-- Progress Bar Section -->
+            <div class="flex items-center space-x-4 mb-6">
+                <span id="current-time" class="text-sm text-gray-400 w-12 text-right">0:00</span>
+                <input type="range" id="progress-bar" min="0" max="100" value="0" class="flex-1">
+                <span id="duration" class="text-sm text-gray-400 w-12">0:00</span>
+            </div>
+            
+            <!-- Playlist -->
+            <div class="mt-6">
+                <h4 class="font-semibold mb-2 text-gray-300">Up Next:</h4>
+                <ul id="playlist" class="space-y-2 max-h-60 overflow-y-auto pr-2">
+                    <!-- Songs will be loaded here dynamically -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- About Section -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About personalized Music Streaming System</h3>
+                    <p class="text-white-200">
+                        Our personalized music streaming platform helps users discover and enjoy music tailored to their preferences. Users can easily create playlists, track their listening habits, and explore new artists and genres. Additionally, the platform provides real-time insights for users to enhance their musical experience.
+                    </p>
+                </div>
+                
+                <!-- Developers Section -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Development Team</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center hover:font-bold">
+                            <i class="fas fa-user-tie mr-2 text-blue-300"></i>
+                            Ashish Raj
+                            <a href="https://www.linkedin.com/in/ashish-raj-47a120277/" class="ml-2 text-blue-300 hover:text-white">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </li>
+                        <li class="flex items-center hover:font-bold">
+                            <i class="fas fa-user-tie mr-2 text-blue-300"></i>
+                            Rajnish Kumar
+                            <a href="https://www.linkedin.com/in/raman-kumar-379081297" class="ml-2 text-blue-300 hover:text-white">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </li>
+                        <li class="flex items-center hover:font-bold">
+                            <i class="fas fa-user-tie mr-2 text-blue-300"></i>
+                            Shivam Kumar Singh
+                            <a href="https://www.linkedin.com/in/riturazz?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="ml-2 text-blue-300 hover:text-white">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </li>
+                        <li class="flex items-center hover:font-bold">
+                            <i class="fas fa-user-tie mr-2 text-blue-300"></i>
+                            Md.Firdous
+                            <a href="https://www.linkedin.com/in/md-firdous-alam-22b2ba298?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+                            " class="ml-2 text-blue-300 hover:text-white">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Section -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact Us</h3>
+                    <address class="text-blue-200 not-italic">
+                        <p class="mb-2 hover:font-bold">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            Lovely Professional University,
+                            Phagwara, Punjab
+                        </p>
+                        <p class="mb-2 hover:font-bold">
+                            <i class="fas fa-phone mr-2"></i>
+                            +91 98357-87192
+                        </p>
+                        <p class="hover:font-bold">
+                            <i class="fas fa-envelope mr-2"></i>
+                            ashishrajstm2003@gmail.com
+                        </p>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-800 mt-8 pt-6 text-center text-blue-300">
+                <p>&copy; <?php echo date('Y'); ?> Event Music System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Hidden YouTube Player -->
+    <div id="player"></div>
+    
+    <!-- JavaScript Files -->
+    <script src="js/player.js"></script>
+    
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const authButtons = document.getElementById('auth-buttons');
+    const username = localStorage.getItem('username');
+    
+    if (username) {
+        // User is logged in
+        authButtons.innerHTML = `
+            <img src="profile.gif" alt="Profile Picture" class="w-10 h-10 rounded-full inline-block">
+            <span class="text-gray-200 font-semibold px-6 py-2 rounded-lg bg-gray-700 hover:bg-gray-900">${username}</span>
+            <button onclick="window.location.href='php/logout.php'" 
+                    class="ml-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow-md transition-all duration-200">
+                Logout
+            </button>
+            </button>
+        `;
+        
+        // Show dashboard link if needed
+        authButtons.innerHTML += `
+            <a href="dashboard.html" 
+               class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">
+                Dashboard
+            </a>
+        `;
+    } else {
+        // User is not logged in
+        authButtons.innerHTML = `
+            <a href="login.html" class="hover:text-purple-400">Login</a>
+            <a href="signup.html" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded">
+                Sign Up
+            </a>
+        `;
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MoodTunes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
+    <style>
+        .bg-music-pattern {
+            background-image: url('bg2.gif');
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-music-pattern bg-cover bg-center">
+    <!-- Main container with glass effect -->
+    <div class="bg-transparent backdrop-blur-md flex flex-col md:flex-row items-center justify-center p-8 shadow-lg rounded-lg max-w-4xl w-full hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]">
+        <!-- Login form section -->
+        <div class="w-full md:w-1/2 px-6 py-8">
+            <div class="flex items-center space-x-3 mb-6">
+                <i class="fas fa-music text-purple-500 text-3xl"></i>
+                <h1 class="font-bold text-3xl text-purple-500">MoodTunes</h1>
+            </div>
+            
+            <h2 class="text-2xl font-bold text-white mb-2">Login to Your Account</h2>
+            <p class="text-gray-300 mb-8">Don't have an account? <a href="signup.html" class="text-purple-400 hover:underline">Sign Up</a></p>
+            
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label class="font-bold text-white">Username or Email</label>
+                    <div class="relative mt-2">
+                        <i class="fas fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="username" name="username" required 
+                               placeholder="your@email.com"
+                               class="rounded-lg w-full h-12 pl-10 bg-gray-800 bg-opacity-70 text-white border border-gray-700 focus:ring-2 focus:ring-purple-500 focus:outline-none">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="font-bold text-white">Password</label>
+                    <div class="relative mt-2">
+                        <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="password" id="password" name="password" required 
+                               placeholder="Enter 6 characters or more"
+                               class="rounded-lg w-full h-12 pl-10 bg-gray-800 bg-opacity-70 text-white border border-gray-700 focus:ring-2 focus:ring-purple-500 focus:outline-none">
+                    </div>
+                </div>
+                
+                <button type="submit" 
+                        class="bg-purple-600 font-bold text-white w-full rounded-lg mt-6 h-12 hover:bg-purple-700 transition-colors duration-300">
+                    Login
+                </button>
+            </form>
+            
+            <p class="text-gray-400 text-center mt-8">or sign in with</p>
+            
+            <div class="flex justify-center space-x-6 mt-4">
+                <button class="p-3 rounded-full bg-gray-800 bg-opacity-60 hover:bg-opacity-80 transition-all">
+                    <i class="fab fa-google text-red-500 text-xl transition-transform duration-200 hover:scale-125"></i>
+                </button>
+                <button class="p-3 rounded-full bg-gray-800 bg-opacity-60 hover:bg-opacity-80 transition-all">
+                    <i class="fab fa-facebook text-blue-500 text-xl transition-transform duration-200 hover:scale-125"></i>
+                </button>
+                <button class="p-3 rounded-full bg-gray-800 bg-opacity-60 hover:bg-opacity-80 transition-all">
+                    <i class="fab fa-apple text-white text-xl transition-transform duration-200 hover:scale-125"></i>
+                </button>
+            </div>
+            
+            <div id="login-message" class="mt-6 hidden text-center"></div>
+        </div>
+        
+        <!-- Image section (hidden on mobile) -->
+        <div class="hidden md:block md:w-1/2 p-6">
+            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                 alt="Music concert" 
+                 class="rounded-lg shadow-xl w-full h-auto object-cover">
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
